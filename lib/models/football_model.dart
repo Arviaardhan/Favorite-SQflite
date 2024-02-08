@@ -1,75 +1,65 @@
 // To parse this JSON data, do
 //
-//     final footballResponseModel = footballResponseModelFromJson(jsonString);
+//     final apiModel = apiModelFromJson(jsonString);
 
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-List<FootballResponseModel> footballResponseModelFromJson(String str) => List<FootballResponseModel>.from(json.decode(str).map((x) => FootballResponseModel.fromJson(x)));
+List<ApiModel> apiModelFromJson(String str) => List<ApiModel>.from(json.decode(str).map((x) => ApiModel.fromJson(x)));
 
-String footballResponseModelToJson(List<FootballResponseModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String apiModelToJson(List<ApiModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class FootballResponseModel {
-  String? teamKey;
-  String? teamName;
-  TeamCountry? teamCountry;
-  int? teamFounded;
-  String? teamBadge;
-  bool isFavorite = false;
+class ApiModel {
+  int id;
+  String title;
+  double price;
+  String description;
+  Category category;
+  String image;
+  bool favorite;
 
-  FootballResponseModel({
-    this.teamKey,
-    this.teamName,
-    this.teamCountry,
-    this.teamFounded,
-    this.teamBadge,
+  ApiModel({
+    required this.id,
+    required this.title,
+    required this.price,
+    required this.description,
+    required this.category,
+    required this.image,
+    this.favorite = false,
   });
 
-  FootballResponseModel.fromJson(Map<String, dynamic> json)  {
-    teamKey = json["team_key"];
-    teamName = json["team_name"] ?? "";
-    teamCountry = teamCountryValues.map[json["team_country"] ?? ""];
-    teamFounded = int.parse(json["team_founded"]);
-    teamBadge = json["team_badge"] ?? "";
-  }
+  factory ApiModel.fromJson(Map<String, dynamic> json) => ApiModel(
+    id: json["id"],
+    title: json["title"],
+    price: json["price"]?.toDouble(),
+    description: json["description"],
+    category: categoryValues.map[json["category"]]!,
+    image: json["image"],
+    favorite: false,
+  );
 
   Map<String, dynamic> toJson() => {
-    "team_key": teamKey,
-    "team_name": teamName,
-    "team_country": teamCountryValues.reverse[teamCountry],
-    "team_founded": teamFounded.toString(),
-    "team_badge": teamBadge,
+    "id": id,
+    "title": title,
+    "price": price,
+    "description": description,
+    "category": categoryValues.reverse[category],
+    "image": image,
   };
-
-  Map<String, dynamic> toMap() {
-    return {
-      'teamKey': teamKey,
-      'teamName': teamName,
-      'teamBadge': teamBadge,
-      'teamCountry': teamCountry?.toString().split('.').last,
-      'teamFounded': teamFounded,
-    };
-  }
-
-  String getCountryName() {
-    if (teamCountry != null) {
-      return teamCountryValues.reverse[teamCountry] ?? "Unknown";
-    } else {
-      return "Unknown";
-    }
-  }
-
-  fromJson(Map<String, Object?> e) {}
 }
 
-enum TeamCountry {
-  EMPTY,
-  SPAIN
+enum Category {
+  ELECTRONICS,
+  JEWELERY,
+  MEN_S_CLOTHING,
+  WOMEN_S_CLOTHING
 }
 
-final teamCountryValues = EnumValues({
-  "": TeamCountry.EMPTY,
-  "Spain": TeamCountry.SPAIN
+final categoryValues = EnumValues({
+  "electronics": Category.ELECTRONICS,
+  "jewelery": Category.JEWELERY,
+  "men's clothing": Category.MEN_S_CLOTHING,
+  "women's clothing": Category.WOMEN_S_CLOTHING
 });
 
 class EnumValues<T> {
