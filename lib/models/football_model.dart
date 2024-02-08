@@ -22,10 +22,10 @@ class FootballResponseModel {
     this.teamName,
     this.teamCountry,
     this.teamFounded,
-    this.teamBadge, required id, required name, required country, required founded, required badgeUrl,
+    this.teamBadge,
   });
 
-  FootballResponseModel.fromJson(Map<String, dynamic> json) {
+  FootballResponseModel.fromJson(Map<String, dynamic> json)  {
     teamKey = json["team_key"];
     teamName = json["team_name"] ?? "";
     teamCountry = teamCountryValues.map[json["team_country"] ?? ""];
@@ -46,7 +46,7 @@ class FootballResponseModel {
       'teamKey': teamKey,
       'teamName': teamName,
       'teamBadge': teamBadge,
-      'countryName': getCountryName(),
+      'teamCountry': teamCountry?.toString().split('.').last,
       'teamFounded': teamFounded,
     };
   }

@@ -6,16 +6,20 @@ import 'package:hit_api_two/models/football_model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../helper/database_helper.dart';
+
 class FootballController extends GetxController {
   var isLoading = true.obs;
   RxBool isFavorite = false.obs;
   Database? database;
   RxList<FootballResponseModel> footballresponsemodel = <FootballResponseModel>[].obs;
+  final FavoriteController favoriteController = Get.put(FavoriteController());
 
   @override
   void onInit() {
     // TODO: implement onInit
     fetchFootball();
+    // FavoriteDatabase.initializeDatabase();
     super.onInit();
   }
   
@@ -33,4 +37,9 @@ class FootballController extends GetxController {
       isLoading.value = false;
     }
   }
+
+  void addToFavorites(FootballResponseModel football) {
+    favoriteController.addToFavorites(football);
+  }
+
 }
