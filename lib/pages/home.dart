@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:hit_api_two/controllers/football_controller.dart';
 import 'package:hit_api_two/helper/themes.dart';
 import 'package:hit_api_two/navbar_widget/navbar_widget.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/carbon.dart';
 
 class HomePage extends StatelessWidget {
   final FootballController footballController = Get.put(FootballController());
@@ -63,13 +65,17 @@ class HomePage extends StatelessWidget {
                               children: [
                                 Padding(
                                   padding: EdgeInsets.only(top: 40),
-                                  child: IconButton(
+                                  child: // HomePage
+                                  IconButton(
                                     onPressed: () {
+                                      if (!football.isFavorite) {
+                                        footballController.addToFavorites(football);
+                                        football.isFavorite = true;
+                                      } else {
+                                        // Tambahkan logika untuk menghapus dari favorit jika diperlukan
+                                      }
                                     },
-                                    icon: football.isFavorite
-                                        ? Icon(Icons.favorite,
-                                        color: Colors.red)
-                                        : Icon(Icons.favorite_border),
+                                    icon: football.isFavorite ? Iconify(Carbon.favorite_filled, color: Colors.red) : Iconify(Carbon.favorite),
                                   ),
                                 ),
                               ],
