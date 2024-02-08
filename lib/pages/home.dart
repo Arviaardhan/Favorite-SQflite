@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hit_api_two/controllers/football_controller.dart';
+import 'package:hit_api_two/controllers/home_controller.dart';
 import 'package:hit_api_two/helper/themes.dart';
 import 'package:hit_api_two/navbar_widget/navbar_widget.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/carbon.dart';
 
+import '../controllers/favorite_controller.dart';
+import '../models/football_model.dart';
+
 class HomePage extends StatelessWidget {
-  final FootballController footballController = Get.put(FootballController());
+  final HomeController controller = Get.put(HomeController());
 
   HomePage({Key? key}) : super(key: key);
 
@@ -15,81 +18,61 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(() {
-        return footballController.isLoading.value
-            ? Center(
-          child: CircularProgressIndicator(),
-        )
-            : ListView.builder(
-          itemCount: footballController.footballresponsemodel.length,
-          itemBuilder: (BuildContext context, int index) {
-            var football = footballController.footballresponsemodel[index];
-            return Container(
-              margin: EdgeInsets.only(bottom: 20),
-              child: Card(
-                surfaceTintColor: Colors.white,
-                margin: EdgeInsets.only(left: 30, right: 30),
-                elevation: 4,
-                child: Container(
-                  margin: EdgeInsets.all(15),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 150,
-                        child: Image.network(
-                          football.teamBadge ?? "",
-                          height: 150,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      SizedBox(width: 16),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 10),
-                              child: Text(football.teamName ?? "",
-                                  style: titleStyle),
+        if (controller.isLoading.value) {
+          return Center(child: CircularProgressIndicator());
+        } else {
+          return GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
+            itemCount: controller.apiModel.length,
+            itemBuilder: (BuildContext context, int index) {
+              var product = controller.apiModel[index];
+              return Container(
+                height: 500,
+                margin: EdgeInsets.only(bottom: 20),
+                child: Card(
+                  surfaceTintColor: Colors.white,
+                  margin: EdgeInsets.only(left: 15, right: 15),
+                  elevation: 4,
+                  child: Container(
+                    margin: EdgeInsets.all(15),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 10, left: 130),
+                          child: Obx(() => InkWell(
+                            child: Icon(
+                                size: 25,
+                                controller.isStored[product.id] == true
+                                    ? Icons.shopping_cart
+                                    : Icons.add_shopping_cart
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 5),
-                              child: Text(
-                                  football.getCountryName() ?? "",
-                                  style: descStyle),
-                            ),
-                            Text('Formed : ${football.teamFounded ?? ""}',
-                                style: descStyle),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(top: 40),
-                                  child: // HomePage
-                                  IconButton(
-                                    onPressed: () {
-                                      if (!football.isFavorite) {
-                                        footballController.addToFavorites(football);
-                                        football.isFavorite = true;
-                                      } else {
-                                        // Tambahkan logika untuk menghapus dari favorit jika diperlukan
-                                      }
-                                    },
-                                    icon: football.isFavorite ? Iconify(Carbon.favorite_filled, color: Colors.red) : Iconify(Carbon.favorite),
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
+                            onTap: () {
+                              controller.saveDataToLocalDatabase(product, context);
+                            },
+                          )),
                         ),
-                      ),
-                    ],
+                        Container(
+                          width: 90, // Adjust the width as needed
+                          child: Image.network(
+                            product.image ?? "",
+                            height: 110,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 10, right: 5),
+                          child: Text(product.title, overflow: TextOverflow.ellipsis, style: titleStyle,),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
-        );
+              );
+            },
+          );
+        }
       }),
       bottomNavigationBar: CustomNavigationBar(),
     );

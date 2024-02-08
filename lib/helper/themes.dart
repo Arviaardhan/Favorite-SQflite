@@ -25,7 +25,7 @@ TextStyle titleStyle = GoogleFonts.poppins(
     textStyle: TextStyle(
         color: titleTextColor,
         fontWeight: AppThemesWeight.semiBold,
-        fontSize: figmaFontsize(25)
+        fontSize: figmaFontsize(15)
     )
 );
 

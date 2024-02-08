@@ -23,7 +23,7 @@ class CustomNavigationBar extends StatelessWidget {
               Get.to(() => HomePage());
               break;
             case 1:
-              Get.to(() => FavoritePage());
+              Get.to(() => CartPage());
               break;
             default:
               break;
