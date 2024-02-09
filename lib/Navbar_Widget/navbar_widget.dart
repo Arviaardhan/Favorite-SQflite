@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hit_api_two/navbar_widget/navbar_controller.dart';
-import 'package:hit_api_two/pages/favorite_page.dart';
-import 'package:hit_api_two/pages/home.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/carbon.dart';
 import 'package:iconify_flutter/icons/heroicons.dart';
+
+import '../Cart/cart_page.dart';
+import '../Home/home_page.dart';
 
 class CustomNavigationBar extends StatelessWidget {
   CustomNavigationBar({Key? key}) : super(key: key);

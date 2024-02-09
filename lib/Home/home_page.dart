@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hit_api_two/controllers/home_controller.dart';
+import 'package:hit_api_two/Home/home_controller.dart';
 import 'package:hit_api_two/helper/themes.dart';
 import 'package:hit_api_two/navbar_widget/navbar_widget.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/carbon.dart';
 
-import '../controllers/favorite_controller.dart';
+import '../Cart/cart_controller.dart';
 import '../models/football_model.dart';
 
 class HomePage extends StatelessWidget {
