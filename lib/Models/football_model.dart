@@ -14,7 +14,7 @@ class ApiModel {
   String title;
   double price;
   String description;
-  Category category;
+  // Category category;
   String image;
   bool favorite;
 
@@ -23,7 +23,7 @@ class ApiModel {
     required this.title,
     required this.price,
     required this.description,
-    required this.category,
+    // required this.category,
     required this.image,
     this.favorite = false,
   });
@@ -33,7 +33,7 @@ class ApiModel {
     title: json["title"],
     price: json["price"]?.toDouble(),
     description: json["description"],
-    category: categoryValues.map[json["category"]]!,
+    // category: categoryValues.map[json["category"]]!,
     image: json["image"],
     favorite: false,
   );
@@ -43,33 +43,33 @@ class ApiModel {
     "title": title,
     "price": price,
     "description": description,
-    "category": categoryValues.reverse[category],
+    // "category": categoryValues.reverse[category],
     "image": image,
   };
 }
 
-enum Category {
-  ELECTRONICS,
-  JEWELERY,
-  MEN_S_CLOTHING,
-  WOMEN_S_CLOTHING
-}
-
-final categoryValues = EnumValues({
-  "electronics": Category.ELECTRONICS,
-  "jewelery": Category.JEWELERY,
-  "men's clothing": Category.MEN_S_CLOTHING,
-  "women's clothing": Category.WOMEN_S_CLOTHING
-});
-
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
-}
+// enum Category {
+//   ELECTRONICS,
+//   JEWELERY,
+//   MEN_S_CLOTHING,
+//   WOMEN_S_CLOTHING
+// }
+//
+// final categoryValues = EnumValues({
+//   "electronics": Category.ELECTRONICS,
+//   "jewelery": Category.JEWELERY,
+//   "men's clothing": Category.MEN_S_CLOTHING,
+//   "women's clothing": Category.WOMEN_S_CLOTHING
+// });
+//
+// class EnumValues<T> {
+//   Map<String, T> map;
+//   late Map<T, String> reverseMap;
+//
+//   EnumValues(this.map);
+//
+//   Map<T, String> get reverse {
+//     reverseMap = map.map((k, v) => MapEntry(v, k));
+//     return reverseMap;
+//   }
+// }

@@ -36,6 +36,7 @@ dependencies:
   google_fonts: ^6.1.0
   iconify_flutter: ^0.0.5
   sqflite: ^2.3.2
+  connectivity_plus:
   path_provider:
 
 dev_dependencies:
