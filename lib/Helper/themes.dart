@@ -8,7 +8,6 @@ const Color borderColor = Color(0xFF656565);
 const Color secondaryColor = Colors.white;
 const Color viewDetailColor = Color(0xFF575757);
 const Color titleTextColor = Color(0xFF262626);
-const Color foodMenuColor = Color(0xFF767676);
 
 figmaFontsize(int fontSize) {
   return fontSize * 0.95;
@@ -29,10 +28,34 @@ TextStyle titleStyle = GoogleFonts.poppins(
     )
 );
 
+TextStyle titleTextDetail = GoogleFonts.poppins(
+    textStyle: TextStyle(
+        color: titleTextColor,
+        fontWeight: AppThemesWeight.bold,
+        fontSize: figmaFontsize(20)
+    )
+);
+
 TextStyle descStyle = GoogleFonts.poppins(
     textStyle: TextStyle(
-        color: iconColor,
-        fontWeight: AppThemesWeight.medium,
+        color: viewDetailColor,
+        fontWeight: AppThemesWeight.regular,
         fontSize: figmaFontsize(15)
+    )
+);
+
+TextStyle priceStyle = GoogleFonts.poppins(
+    textStyle: TextStyle(
+        color: Colors.white,
+        fontWeight: AppThemesWeight.semiBold,
+        fontSize: figmaFontsize(20)
+    )
+);
+
+TextStyle favoriteStyle = GoogleFonts.poppins(
+    textStyle: TextStyle(
+        color: Colors.white,
+        fontWeight: AppThemesWeight.semiBold,
+        fontSize: figmaFontsize(20)
     )
 );

@@ -5,7 +5,7 @@ import 'package:hit_api_two/Cart/cart_page.dart';
 import 'package:hit_api_two/pages/page.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-import '../models/football_model.dart';
+import '../models/api_model.dart';
 
 class CartController extends GetxController {
   Database? database;

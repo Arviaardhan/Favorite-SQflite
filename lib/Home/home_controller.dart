@@ -1,8 +1,9 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hit_api_two/models/football_model.dart';
+import 'package:hit_api_two/models/api_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -22,10 +23,9 @@ class HomeController extends GetxController {
 
   void fetchItem() async {
     try {
-      final response = await http.get(Uri.parse('https://fakestoreapi.com/products'),);
+      final response = await http.get(Uri.parse('https://fakestoreapi.com/products'));
       if (response.statusCode == 200) {
         apiModel.value = apiModelFromJson(response.body);
-        await updateIsStoredFromDatabase();
         isLoading.value = false;
       } else {
         print('Error: ${response.statusCode}');
