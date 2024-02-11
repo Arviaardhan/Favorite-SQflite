@@ -30,6 +30,7 @@ class CartController extends GetxController {
   }
 
   Future<List<ApiModel>> getDataItem() async {
+    isLoading.value = true;
     Directory directory = await getApplicationDocumentsDirectory();
     String path = directory.path + "db_item";
     database = await openDatabase(path);
