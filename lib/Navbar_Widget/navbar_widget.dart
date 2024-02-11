@@ -4,6 +4,7 @@ import 'package:hit_api_two/navbar_widget/navbar_controller.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/carbon.dart';
 import 'package:iconify_flutter/icons/heroicons.dart';
+import 'package:iconify_flutter/icons/ion.dart';
 
 import '../Cart/cart_page.dart';
 import '../Home/home_page.dart';
@@ -32,11 +33,19 @@ class CustomNavigationBar extends StatelessWidget {
         },
         items: [
           BottomNavigationBarItem(
-            icon: Iconify(Heroicons.home_solid, color: navbarController.selectedIndex.value == 0 ? Colors.blueAccent : Colors.grey),
+            icon: Obx(() => Iconify(
+              // Change icon to home_solid when selected index is 0
+              navbarController.selectedIndex.value == 0 ? Ion.home_outline : Ion.home_sharp,
+              color: navbarController.selectedIndex.value == 0 ? Colors.blueAccent : Colors.grey,
+            )),
             label: "Home",
           ),
           BottomNavigationBarItem(
-            icon: Iconify(Carbon.favorite, color: navbarController.selectedIndex.value == 1 ? Colors.blueAccent : Colors.grey),
+            icon: Obx(() => Iconify(
+              // Change icon to favorite_solid when selected index is 1
+              navbarController.selectedIndex.value == 1 ? Carbon.favorite_filled : Carbon.favorite,
+              color: navbarController.selectedIndex.value == 1 ? Colors.blueAccent : Colors.grey,
+            )),
             label: "Favorite",
           ),
         ],
