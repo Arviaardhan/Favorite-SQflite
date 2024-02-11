@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:hit_api_two/Cart/cart_controller.dart';
 import 'package:hit_api_two/helper/themes.dart';
-import 'package:hit_api_two/models/football_model.dart';
+import 'package:hit_api_two/models/api_model.dart';
 import 'package:hit_api_two/navbar_widget/navbar_widget.dart';
 
 class CartPage extends StatelessWidget {
@@ -68,7 +68,7 @@ class CartPage extends StatelessWidget {
               },
             );
           } else {
-            return Center(child: Text("Tidak Ada Data"));
+            return Center(child: Text("Tidak Ada Data", style: titleStyle,));
           }
         },
       ),
