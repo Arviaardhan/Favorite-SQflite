@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hit_api_two/Detail/detail_page.dart';
+import 'package:hit_api_two/Helper/themes.dart';
 import 'package:hit_api_two/Home/home_controller.dart';
-import 'package:hit_api_two/helper/themes.dart';
 import 'package:hit_api_two/navbar_widget/navbar_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -42,23 +42,9 @@ class HomePage extends StatelessWidget {
                       margin: EdgeInsets.only(left: 15, right: 15),
                       elevation: 4,
                       child: Container(
-                        margin: EdgeInsets.all(15),
+                        margin: EdgeInsets.only(top: 15),
                         child: Column(
                           children: [
-                            Padding(
-                                padding: EdgeInsets.only(bottom: 10, left: 130),
-                                child: Obx(() => InkWell(
-                                  child: Icon(
-                                      size: 25,
-                                      controller.isStored[product.id] == true
-                                          ? Icons.shopping_cart
-                                          : Icons.add_shopping_cart
-                                  ),
-                                  onTap: () {
-                                    controller.saveDataToLocalDatabase(product, context);
-                                  },
-                                ))
-                            ),
                             Container(
                               width: 90, // Adjust the width as needed
                               child: Image.network(
@@ -68,8 +54,27 @@ class HomePage extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(top: 10, right: 5),
+                              padding: EdgeInsets.only(top: 10, right: 20, left: 20),
                               child: Text(product.title, overflow: TextOverflow.ellipsis, style: titleStyle,),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(right: 20, left: 20, top: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text('\$ ${product.price.toStringAsFixed(2)}', style: priceStyleHome,),
+                                  Obx(() => InkWell(
+                                    child: Icon(
+                                      controller.isStored[product.id] == true ? Icons.shopping_cart : Icons.add_shopping_cart,
+                                      size: 25,
+                                      color: controller.isStored[product.id] == true ? Colors.black : Colors.grey, // Ganti warna sesuai kondisi
+                                    ),
+                                    onTap: () {
+                                      controller.saveDataToLocalDatabase(product, context);
+                                    },
+                                  )),
+                                ],
+                              ),
                             ),
                           ],
                         ),

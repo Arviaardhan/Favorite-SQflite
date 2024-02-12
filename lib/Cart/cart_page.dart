@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:hit_api_two/Cart/cart_controller.dart';
-import 'package:hit_api_two/helper/themes.dart';
 import 'package:hit_api_two/models/api_model.dart';
 import 'package:hit_api_two/navbar_widget/navbar_widget.dart';
+
+import '../Helper/themes.dart';
 
 class CartPage extends StatelessWidget {
   final CartController controller = Get.put(CartController());
@@ -33,21 +34,9 @@ class CartPage extends StatelessWidget {
                     margin: EdgeInsets.only(left: 15, right: 15),
                     elevation: 4,
                     child: Container(
-                      margin: EdgeInsets.all(10),
+                      margin: EdgeInsets.only(top: 15),
                       child: Column(
                         children: [
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 10, left: 130),
-                            child: InkWell(
-                              child: Container(
-                                  alignment: Alignment.topRight,
-                                  child: Icon(Icons.delete)
-                              ),
-                              onTap: () async {
-                                await controller.delete(item.id);
-                              },
-                            ),
-                          ),
                           Container(
                             width: 90, // Adjust the width as needed
                             child: Image.network(
@@ -57,8 +46,26 @@ class CartPage extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 11, right: 5),
+                            padding: EdgeInsets.only(top: 10, right: 20, left: 20),
                             child: Text(item.title, overflow: TextOverflow.ellipsis, style: titleStyle,),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(right: 20, left: 20, top: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('\$ ${item.price.toStringAsFixed(2)}', style: priceStyleHome,),
+                                InkWell(
+                                  child: Container(
+                                      alignment: Alignment.topRight,
+                                      child: Icon(Icons.delete, color: Colors.red,)
+                                  ),
+                                  onTap: () async {
+                                    await controller.delete(item.id);
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
