@@ -8,6 +8,7 @@ const Color borderColor = Color(0xFF656565);
 const Color secondaryColor = Colors.white;
 const Color viewDetailColor = Color(0xFF575757);
 const Color titleTextColor = Color(0xFF262626);
+const Color priceColor = Color(0xFF228B22);
 
 figmaFontsize(int fontSize) {
   return fontSize * 0.95;
@@ -52,10 +53,10 @@ TextStyle priceStyle = GoogleFonts.poppins(
     )
 );
 
-TextStyle favoriteStyle = GoogleFonts.poppins(
+TextStyle priceStyleHome = GoogleFonts.poppins(
     textStyle: TextStyle(
-        color: Colors.white,
+        color: priceColor,
         fontWeight: AppThemesWeight.semiBold,
-        fontSize: figmaFontsize(20)
+        fontSize: figmaFontsize(15)
     )
 );

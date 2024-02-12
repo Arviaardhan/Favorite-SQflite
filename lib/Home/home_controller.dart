@@ -28,6 +28,7 @@ class HomeController extends GetxController {
       final response = await http.get(Uri.parse('https://fakestoreapi.com/products'));
       if (response.statusCode == 200) {
         apiModel.value = apiModelFromJson(response.body);
+        await updateIsStoredFromDatabase();
       } else {
         print('Error: ${response.statusCode}');
       }

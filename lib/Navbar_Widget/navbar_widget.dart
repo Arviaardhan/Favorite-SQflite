@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hit_api_two/navbar_widget/navbar_controller.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/ant_design.dart';
 import 'package:iconify_flutter/icons/carbon.dart';
-import 'package:iconify_flutter/icons/heroicons.dart';
-import 'package:iconify_flutter/icons/ion.dart';
 
 import '../Cart/cart_page.dart';
 import '../Home/home_page.dart';
@@ -35,7 +34,7 @@ class CustomNavigationBar extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Obx(() => Iconify(
               // Change icon to home_solid when selected index is 0
-              navbarController.selectedIndex.value == 0 ? Ion.home_outline : Ion.home_sharp,
+              navbarController.selectedIndex.value == 0 ? AntDesign.home_fill : AntDesign.home_outline,
               color: navbarController.selectedIndex.value == 0 ? Colors.blueAccent : Colors.grey,
             )),
             label: "Home",
