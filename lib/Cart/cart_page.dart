@@ -41,7 +41,7 @@ class CartPage extends StatelessWidget {
                             child: InkWell(
                               child: Container(
                                   alignment: Alignment.topRight,
-                                  child: Icon(Icons.delete_outline_rounded)
+                                  child: Icon(Icons.delete)
                               ),
                               onTap: () async {
                                 await controller.delete(item.id);

@@ -5,12 +5,15 @@ import 'package:hit_api_two/Cart/cart_page.dart';
 import 'package:hit_api_two/pages/page.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import '../Home/home_controller.dart';
 import '../models/api_model.dart';
 
 class CartController extends GetxController {
+
+  final HomeController controller = Get.put(HomeController());
+  RxMap<int, bool> isStored = RxMap<int, bool>();
   Database? database;
   var isLoading = true.obs;
-  RxMap<int, bool> isStored = RxMap<int, bool>();
 
   Future<void> delete(int id) async {
     String table = "item";
@@ -23,6 +26,7 @@ class CartController extends GetxController {
       Get.snackbar("Pesan", "Item berhasil dihapus dari keranjang");
       Get.off(BlandPage());
       Get.off(CartPage());
+      controller.isStored[id] = false;
       isStored[id] = false;
     } catch (e) {
       print("Error deleting data from the database: $e");

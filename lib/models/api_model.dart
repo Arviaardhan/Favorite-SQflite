@@ -40,6 +40,7 @@ class ApiModel {
     "description": description,
     // "category": categoryValues.reverse[category],
     "image": image,
+    "favorite" :favorite
   };
 }
 

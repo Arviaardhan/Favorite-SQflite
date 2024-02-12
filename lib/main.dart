@@ -5,7 +5,6 @@ import 'package:hit_api_two/Splash/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
-  WidgetsFlutterBinding.ensureInitialized();
 }
 
 class MyApp extends StatelessWidget {
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: SplashScreen(),
+      home: HomePage(),
     );
   }
 }
