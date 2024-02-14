@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hit_api_two/Detail/detail_controller.dart';
 import 'package:hit_api_two/Helper/themes.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/carbon.dart';
 import 'package:iconify_flutter/icons/ion.dart';
 
 import 'package:hit_api_two/models/api_model.dart';
@@ -22,7 +23,7 @@ class DetailPage extends StatelessWidget {
           centerTitle: true,
           elevation: 0,
           foregroundColor: Colors.black,
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.white,
           titleTextStyle: TextStyle(
               color: Colors.black,
               fontSize: 20,
@@ -40,6 +41,7 @@ class DetailPage extends StatelessWidget {
           child: Column(
             children: [
               Container(
+                color: Colors.white,
                 padding: EdgeInsets.symmetric(horizontal: 60, vertical: 10),
                 child: Image.network(
                   item.image ?? "",
@@ -69,6 +71,7 @@ class DetailPage extends StatelessWidget {
                   child: SingleChildScrollView(
                     scrollDirection: Axis.vertical,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           children: [
@@ -82,17 +85,30 @@ class DetailPage extends StatelessWidget {
                             Container(
                                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                                 decoration: BoxDecoration(
-                                  color: Colors.deepOrange,
-                                  borderRadius: BorderRadius.circular(10)
+                                  shape: BoxShape.circle,
                                 ),
-                                child: Text('\$ ${item.price.toStringAsFixed(2)}', style: priceStyle,)
+                              child: IconButton(
+                                icon: Obx(() => Icon(
+                                  controller.isStored[item.id] == true ? Icons.favorite : Icons.favorite_border,
+                                  size: 25,
+                                  color: controller.isStored[item.id] == true ? Colors.red : Colors.grey,
+                                )),
+                                onPressed: () async {
+                                  if (controller.isStored[item.id] == true) {
+                                    await controller.removeDataFromLocalDatabase(item.id);
+                                  } else {
+                                    controller.saveDataToLocalDatabase(item, context);
+                                  }
+                                },
+                              ),
                             )
                           ],
                         ),
                         Padding(
-                          padding: EdgeInsets.only(top: 20),
-                          child: Text(item.description, style: descStyle,),
-                        )
+                          padding: EdgeInsets.only(bottom: 20, top: 10),
+                          child: Text('\$ ${item.price.toStringAsFixed(2)}', style: priceStyle,),
+                        ),
+                        Text(item.description, style: descStyle,)
                       ],
                     ),
                   ),

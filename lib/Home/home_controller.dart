@@ -84,9 +84,6 @@ class HomeController extends GetxController {
         Get.snackbar("Pesan", "Item berhasil dimasukkan ke keranjang");
         print(itemModel.toJson());
         isStored[itemModel.id] = true;
-      }else{
-        Get.snackbar("Pesan", "Item sudah ada di keranjang");
-        isStored[itemModel.id] = true;
       }
     } catch (e) {
       print("Error inserting data into the database: $e");

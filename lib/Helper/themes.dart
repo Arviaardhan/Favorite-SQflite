@@ -29,6 +29,14 @@ TextStyle titleStyle = GoogleFonts.poppins(
     )
 );
 
+TextStyle titlePageStyle = GoogleFonts.poppins(
+    textStyle: TextStyle(
+        color: headerTextColor,
+        fontWeight: AppThemesWeight.semiBold,
+        fontSize: figmaFontsize(20)
+    )
+);
+
 TextStyle titleTextDetail = GoogleFonts.poppins(
     textStyle: TextStyle(
         color: titleTextColor,
@@ -47,7 +55,7 @@ TextStyle descStyle = GoogleFonts.poppins(
 
 TextStyle priceStyle = GoogleFonts.poppins(
     textStyle: TextStyle(
-        color: Colors.white,
+        color: priceColor,
         fontWeight: AppThemesWeight.semiBold,
         fontSize: figmaFontsize(20)
     )
