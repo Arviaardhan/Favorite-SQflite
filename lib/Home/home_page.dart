@@ -62,7 +62,20 @@ class HomePage extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('\$ ${product.price.toStringAsFixed(2)}', style: priceStyleHome,),
+                                  RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: '\$ ',
+                                          style: symbolDollar, // warna hijau untuk simbol mata uang
+                                        ),
+                                        TextSpan(
+                                          text: '${product.price.toStringAsFixed(2)}',
+                                          style: priceStyle,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                   Obx(() => InkWell(
                                     child: Icon(
                                       controller.isStored[product.id] == true ? Icons.shopping_cart : Icons.add_shopping_cart,

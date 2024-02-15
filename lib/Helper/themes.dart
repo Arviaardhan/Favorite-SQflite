@@ -53,11 +53,19 @@ TextStyle descStyle = GoogleFonts.poppins(
     )
 );
 
-TextStyle priceStyle = GoogleFonts.poppins(
+TextStyle symbolDollar = GoogleFonts.poppins(
     textStyle: TextStyle(
         color: priceColor,
         fontWeight: AppThemesWeight.semiBold,
-        fontSize: figmaFontsize(20)
+        fontSize: figmaFontsize(23)
+    )
+);
+
+TextStyle priceStyle = GoogleFonts.poppins(
+    textStyle: TextStyle(
+        color: hintTextColor,
+        fontWeight: AppThemesWeight.semiBold,
+        fontSize: figmaFontsize(18)
     )
 );
 

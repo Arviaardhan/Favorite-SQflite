@@ -106,7 +106,20 @@ class DetailPage extends StatelessWidget {
                         ),
                         Padding(
                           padding: EdgeInsets.only(bottom: 20, top: 10),
-                          child: Text('\$ ${item.price.toStringAsFixed(2)}', style: priceStyle,),
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: '\$ ',
+                                  style: symbolDollar, // warna hijau untuk simbol mata uang
+                                ),
+                                TextSpan(
+                                  text: '${item.price.toStringAsFixed(2)}',
+                                  style: priceStyle,
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                         Text(item.description, style: descStyle,)
                       ],
