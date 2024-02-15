@@ -78,11 +78,8 @@ class DetailController extends GetxController {
         Map<String, dynamic> itemData = itemModel.toJson();
         itemData['favorite'] = true;
         await database!.insert(table, itemData);
-        Get.snackbar("Pesan", "Item berhasil dimasukkan ke keranjang");
+        Get.snackbar("Pesan", "Item berhasil ditambahkan di favorite");
         print(itemModel.toJson());
-        isStored[itemModel.id] = true;
-      }else{
-        Get.snackbar("Pesan", "Item sudah ada di keranjang");
         isStored[itemModel.id] = true;
       }
     } catch (e) {

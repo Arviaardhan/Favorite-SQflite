@@ -19,61 +19,84 @@ class CartPage extends StatelessWidget {
         future: controller.getDataItem(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-              ),
+            return ListView.builder (
               itemCount: snapshot.data!.length,
               itemBuilder: (BuildContext context, int index) {
                 ApiModel item = snapshot.data![index];
-                return Container(
-                  height: 500,
-                  margin: EdgeInsets.only(bottom: 20),
-                  child: Card(
-                    surfaceTintColor: Colors.white,
-                    margin: EdgeInsets.only(left: 15, right: 15),
-                    elevation: 4,
-                    child: Container(
-                      margin: EdgeInsets.only(top: 15),
-                      child: Column(
+                int quantity = 1;
+                double totalPrice = item.price;
+                return Column(
+                  children: [
+                    ListTile(
+                      leading: Container(
+                        width: 80,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5), // Warna bayangan kotak
+                              spreadRadius: 2,
+                              blurRadius: 3,
+                              offset: Offset(0, 2), // Atur posisi bayangan kotak
+                            ),
+                          ],
+                        ),
+                        child: Image.network(
+                          item.image ?? "",
+                          height: 110,
+                          fit: BoxFit.fitHeight,
+                        ),
+                      ),
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            width: 90, // Adjust the width as needed
-                            child: Image.network(
-                              item.image ?? "",
-                              height: 110,
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 10, right: 20, left: 20),
-                            child: Text(item.title, overflow: TextOverflow.ellipsis, style: titleStyle,),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(right: 20, left: 20, top: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('\$ ${item.price.toStringAsFixed(2)}', style: priceStyleHome,),
-                                InkWell(
-                                  child: Container(
-                                      alignment: Alignment.topRight,
-                                      child: Icon(Icons.delete, color: Colors.red,)
+                          Text(item.title, overflow: TextOverflow.ellipsis, style: titleStyle),
+                          SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      if (quantity > 1) {
+                                        quantity--;
+                                        totalPrice -= item.price;
+                                      }
+                                    },
+                                    icon: Icon(Icons.remove),
                                   ),
-                                  onTap: () async {
-                                    await controller.delete(item.id);
-                                  },
-                                ),
-                              ],
-                            ),
+                                  Text('$quantity'),
+                                  IconButton(
+                                    onPressed: () {
+                                      quantity++;
+                                      totalPrice += item.price;
+                                    },
+                                    icon: Icon(Icons.add),
+                                  ),
+                                ],
+                              ),
+                              Text('\$ ${totalPrice.toStringAsFixed(2)}', style: priceStyleHome),
+                            ],
                           ),
                         ],
                       ),
+                      trailing: IconButton(
+                        onPressed: () async {
+                          await controller.delete(item.id);
+                        },
+                        icon: Icon(Icons.delete, color: Colors.red),
+                      ),
                     ),
-                  ),
+                    Divider(),
+                  ],
                 );
               },
             );
+
+
           } else {
             return Center(child: Text("Tidak Ada Data", style: titleStyle,));
           }
